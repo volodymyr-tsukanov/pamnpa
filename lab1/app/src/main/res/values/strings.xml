@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Lab1</string>
 
-    <string name="activity_1_name">A1</string>
+    <string name="activity_1_name">Lab1-GUI</string>
     <string name="activity_2_name">A2</string>
 </resources>
