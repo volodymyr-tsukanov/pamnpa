@@ -1,7 +1,7 @@
 # pamnpa
 Android app dev
 
-**Android Studio**, **Java** <br><br>
+**Java**, **Android Studio** <br><br>
 
 
 Shields: [![MIT License][mit-shield]][mit]
