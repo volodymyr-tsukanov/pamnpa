@@ -77,11 +77,17 @@ public class MainActivity extends AppCompatActivity {
             arl.launch(intent);
             finish();
         }
+        if(id == R.id.menu_main_main){
+            toast("MAIN");
+            intent.setClass(this,MainActivity.class);
+            arl.launch(intent);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 
 
-    private void toast(String msg){
+    protected void toast(String msg){
         Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
         toast.show();
     }
