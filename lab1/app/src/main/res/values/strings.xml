@@ -6,6 +6,7 @@
     <string name="activity_1_name">Oceny</string>
 
     <string name="activity_2_name">A2</string>
+    <string name="activity_2_b_goBack_text">GObACK</string>
     <string name="activity_2_b_calculate_text">Wylicz średnią</string>
     <string-array name="activity_2_subjects">
         <item>Math</item>

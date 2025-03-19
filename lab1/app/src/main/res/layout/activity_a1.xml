@@ -80,5 +80,5 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_a1_ediText_points" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_a1_button_points" />
 </androidx.constraintlayout.widget.ConstraintLayout>

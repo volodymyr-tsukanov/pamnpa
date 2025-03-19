@@ -1,9 +1,11 @@
 package com.vt.lab1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class A2 extends MainActivity {
+public class A2 extends AppCompatActivity {
 
     LinearLayout ll_grades;
     Button b_calculateAverage;
@@ -54,14 +56,21 @@ public class A2 extends MainActivity {
             if (count > 0) {
                 float average = total / count;
 
+                //toast(String.valueOf(average));
+
                 // Return the average grade to the first activity
-                intent.setClass(this, A1.class);
+                Intent intent = new Intent(this, A1.class);
                 intent.putExtra("average", average);
-                setResult(RESULT_OK, intent);
+                setResult(RESULT_OK,intent);
+                //startActivityForResult(intent,69);
                 finish();
             }
         });
+    }
 
-        intent.setClass(this, MainActivity.class);
+
+    protected void toast(String msg){
+        Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

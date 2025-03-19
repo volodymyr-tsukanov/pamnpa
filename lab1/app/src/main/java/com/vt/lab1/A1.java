@@ -103,6 +103,8 @@ public class A1 extends MainActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        toast("Res" + requestCode);
+
         if (resultCode == RESULT_OK) {
             // Get the average grade from Activity A2
             float average = data.getFloatExtra("average", 0);
@@ -111,7 +113,7 @@ public class A1 extends MainActivity {
             String resultMessage = "Średnia: " + average;
             toast(resultMessage);
 
-            // Show the appropriate button based on the average
+            b_action.setVisibility(View.VISIBLE);
             if (average >= 3) {
                 b_action.setText("Super");
                 //b_action.setOnClickListener();
