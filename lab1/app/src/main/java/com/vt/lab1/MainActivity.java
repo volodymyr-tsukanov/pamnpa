@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.graphics.Insets;
@@ -54,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });*/
     }
-
-// MENU
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    // MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -70,14 +74,7 @@ public class MainActivity extends AppCompatActivity {
             intent.setClass(this,A1.class);
             arl.launch(intent);
             finish();
-        }
-        if(id == R.id.menu_main_a2){
-            toast("A2");
-            intent.setClass(this,A1.class);
-            arl.launch(intent);
-            finish();
-        }
-        if(id == R.id.menu_main_main){
+        } else {
             toast("MAIN");
             intent.setClass(this,MainActivity.class);
             arl.launch(intent);

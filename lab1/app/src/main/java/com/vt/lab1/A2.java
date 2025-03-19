@@ -1,15 +1,15 @@
 package com.vt.lab1;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 public class A2 extends MainActivity {
 
@@ -23,7 +23,8 @@ public class A2 extends MainActivity {
         setContentView(R.layout.activity_a2);
 
         ll_grades = findViewById(R.id.activity_a2_ll_grades);
-        b_calculateAverage = findViewById(R.id.activity_a2_b_calculateAverage);
+        b_calculateAverage = findViewById(R.id.activity_a2_b_calculate);
+        String[] subjectNames = getResources().getStringArray(R.array.activity_2_subjects);
 
         // Retrieve number of subjects (points) from previous activity
         numSubjects = getIntent().getIntExtra("points", 0);
@@ -45,7 +46,7 @@ public class A2 extends MainActivity {
                     total += Float.parseFloat(et_grade.getText().toString());
                     count++;
                 } catch (NumberFormatException e) {
-                    toast(this, "Invalid grade entered!");
+                    toast("Invalid grade entered!");
                     return;
                 }
             }

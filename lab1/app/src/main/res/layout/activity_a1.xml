@@ -15,7 +15,6 @@
         android:text="Imię"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/activity_a1_text_surname"
         android:layout_width="wrap_content"
@@ -24,7 +23,6 @@
         android:text="Nazwisko"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_a1_text_name" />
-
     <TextView
         android:id="@+id/activity_a1_text_points"
         android:layout_width="wrap_content"
@@ -33,7 +31,6 @@
         android:text="Punkty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_a1_text_surname" />
-
     <EditText
         android:id="@+id/activity_a1_ediText_name"
         android:layout_width="wrap_content"
@@ -45,7 +42,6 @@
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/activity_a1_text_name"
         app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/activity_a1_ediText_surname"
         android:layout_width="wrap_content"
@@ -56,7 +52,6 @@
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/activity_a1_text_surname"
         app:layout_constraintTop_toBottomOf="@+id/activity_a1_ediText_name" />
-
     <EditText
         android:id="@+id/activity_a1_ediText_points"
         android:layout_width="wrap_content"
@@ -73,6 +68,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OCENY"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_a1_ediText_points" />
+    <Button
+        android:id="@+id/activity_a1_b_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*ACTION*"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

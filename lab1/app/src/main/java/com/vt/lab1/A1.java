@@ -1,5 +1,6 @@
 package com.vt.lab1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -102,7 +103,7 @@ public class A1 extends MainActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             // Get the average grade from Activity A2
             float average = data.getFloatExtra("average", 0);
 
@@ -113,11 +114,11 @@ public class A1 extends MainActivity {
             // Show the appropriate button based on the average
             if (average >= 3) {
                 b_action.setText("Super");
-                b_action.setOnClickListener();
+                //b_action.setOnClickListener();
                 //TODO
             } else {
                 b_action.setText(".");
-                b_action.setOnClickListener();
+                //b_action.setOnClickListener();
                 //TODO
             }
         }
@@ -131,15 +132,15 @@ public class A1 extends MainActivity {
             String outp = "Niepoprawne: ";
             if(!isName){
                 outp += "imie ";
-                et_name.setError("IMIIIEEE");
+                et_name.setError("IMIE");
             }
             if(!isSurname){
                 outp += "nazwisko ";
-                et_surname.setError("NAZZZWISKOOO");
+                et_surname.setError("NAZWISKO");
             }
             if(!isPoints){
                 outp += "ocena ";
-                et_points.setError("OOOOOOOCENAAAAA");
+                et_points.setError("OCENA");
             }
             toast(outp);
             b_points.setVisibility(View.GONE);
