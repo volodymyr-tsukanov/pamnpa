@@ -2,6 +2,17 @@
     <string name="app_name">Lab1</string>
 
     <string name="activity_main_name">MAIN</string>
+
     <string name="activity_1_name">Lab1-GUI</string>
+
     <string name="activity_2_name">A2</string>
+    <string-array name="a2_subjects">
+        <item>Math</item>
+        <item>Physics</item>
+        <item>Chemistry</item>
+        <item>Biology</item>
+        <item>Yapology</item>
+        <item>Brainrotology</item>
+        <item>Sigmology</item>
+    </string-array>
 </resources>

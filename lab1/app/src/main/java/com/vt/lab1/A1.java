@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class A1 extends MainActivity {
     boolean isName, isSurname, isPoints;
     EditText et_name, et_surname, et_points;
-    Button b_points;
+    Button b_points, b_action;
 
 
     @Override
@@ -26,12 +26,11 @@ public class A1 extends MainActivity {
         et_surname = findViewById(R.id.activity_a1_ediText_surname);
         et_points = findViewById(R.id.activity_a1_ediText_points);
         b_points = findViewById(R.id.activity_a1_button_points);
+        b_action = findViewById(R.id.activity_a1_b_action);
 
         et_name.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 isName = false;
@@ -50,13 +49,9 @@ public class A1 extends MainActivity {
         });
         et_surname.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.length() > 0) isSurname = true;
@@ -71,13 +66,9 @@ public class A1 extends MainActivity {
         });
         et_points.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
                 isPoints = false;
@@ -98,11 +89,38 @@ public class A1 extends MainActivity {
                 if(!b) testB();
             }
         });
+
         b_points.setOnClickListener((view -> {
-            toast("Butt");
+            intent.setClass(this, A2.class);
+            intent.putExtra("points", Integer.parseInt(et_points.getText().toString()));
+            startActivity(intent);
         }));
 
         intent.setClass(this, MainActivity.class);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            // Get the average grade from Activity A2
+            float average = data.getFloatExtra("average", 0);
+
+            // Show the average grade
+            String resultMessage = "Średnia: " + average;
+            toast(resultMessage);
+
+            // Show the appropriate button based on the average
+            if (average >= 3) {
+                b_action.setText("Super");
+                b_action.setOnClickListener();
+                //TODO
+            } else {
+                b_action.setText(".");
+                b_action.setOnClickListener();
+                //TODO
+            }
+        }
     }
 
 
