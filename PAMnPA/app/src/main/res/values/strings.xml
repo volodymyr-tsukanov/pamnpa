@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">PAMnPA</string>
+
+    <string name="activity_main_name">MAIN</string>
+
+    <string name="activity_1_name">Oceny</string>
+    <string name="activity_1_text_name">Imię</string>
+    <string name="activity_1_text_surname">Nazwisko</string>
+    <string name="activity_1_text_points">Punkty</string>
+
+    <string name="activity_2_name">A2</string>
+
 </resources>
