@@ -17,9 +17,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.vt.pamnpa.R;
 
 public class A1 extends BaseActivity {
-    boolean isName, isSurname, isPoints;
+    boolean isName, isSurname, isPoints, isOwingMoney = true;
     EditText et_name, et_surname, et_points;
-    Button b_points;
+    Button b_points, b_action;
 
 
     @Override
@@ -34,6 +34,7 @@ public class A1 extends BaseActivity {
         et_surname = findViewById(R.id.activity_a1_ediText_surname);
         et_points = findViewById(R.id.activity_a1_ediText_points);
         b_points = findViewById(R.id.activity_a1_button_points);
+        b_action = findViewById(R.id.activity_a1_b_action);
 
         et_name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,16 +88,48 @@ public class A1 extends BaseActivity {
         et_points.setOnFocusChangeListener((view, b) -> {
             if(!b) testB();
         });
-        b_points.setOnClickListener((view -> {
-            toast("Butt");
-        }));
+        b_points.setOnClickListener(view -> {
+            intent.setClass(this, A2.class);
+            intent.putExtra("points", Integer.parseInt(et_points.getText().toString()));
+            arl.launch(intent);
+        });
+        b_action.setOnClickListener(view->{
+            if(isOwingMoney){
+                toast("przygotuj 166.66 zl za warunek");
+            } else {
+                toast("Zaliczone");
+            }
+        });
 
         intent.setClass(this, MainActivity.class);
     }
 
     @Override
     protected void onActivityResult(ActivityResult result) {
-        toast(String.valueOf(result.getResultCode()));
+        switch(result.getResultCode()){
+            case 69:
+            // Get the average grade from Activity A2
+            float average = result.getData().getFloatExtra("average", 0);
+
+            // Show the average grade
+            String resultMessage = "Średnia: " + average;
+            toast(resultMessage);
+
+            b_action.setVisibility(View.VISIBLE);
+            if (average > 3.5) {
+                isOwingMoney = false;
+                b_action.setText("Super");
+            } else {
+                isOwingMoney = true;
+                b_action.setText("Super?\uD83D\uDE08");
+            }
+            break;
+            case 6:
+                toast("Nie wpisano ocen");
+                break;
+            default:
+                toast("error code 0xc000019c: Buy new iPhone to solve this error");
+        }
     }
 
 

@@ -38,6 +38,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(ActivityResult result) {
-        toast(String.valueOf(result.getResultCode()));
+        toast("Main: "+result.getResultCode());
     }
 }

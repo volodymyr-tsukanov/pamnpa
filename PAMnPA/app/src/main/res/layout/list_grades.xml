@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <TextView android:id="@+id/list_grades_t_subject"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+
+    <RadioGroup android:id="@+id/list_grades_rg_grade"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+        <RadioButton android:id="@+id/radio_2"
+                     android:text="2"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
+
+        <RadioButton android:id="@+id/radio_3"
+                     android:text="3"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
+
+        <RadioButton android:id="@+id/radio_4"
+                     android:text="4"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
+
+        <RadioButton android:id="@+id/radio_5"
+                     android:text="5"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
+
+        <RadioButton android:id="@+id/radio_0"
+                     android:text="0"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
+    </RadioGroup>
+</LinearLayout>
