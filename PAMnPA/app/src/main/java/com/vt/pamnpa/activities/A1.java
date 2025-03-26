@@ -16,6 +16,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.vt.pamnpa.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class A1 extends BaseActivity {
     boolean isName, isSurname, isPoints, isOwingMoney = true;
     EditText et_name, et_surname, et_points;
@@ -45,8 +48,7 @@ public class A1 extends BaseActivity {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length() > 0) isName = true;
-                else isName = false;
+                isName = editable.length() > 0;
             }
         });
         et_name.setOnFocusChangeListener((view, b) -> {
@@ -59,8 +61,7 @@ public class A1 extends BaseActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length() > 0) isSurname = true;
-                else isSurname = false;
+                isSurname = editable.length() > 0;
             }
         });
         et_surname.setOnFocusChangeListener((view, b) -> {
@@ -92,12 +93,15 @@ public class A1 extends BaseActivity {
             intent.setClass(this, A2.class);
             intent.putExtra("points", Integer.parseInt(et_points.getText().toString()));
             arl.launch(intent);
+            b_action.setVisibility(View.INVISIBLE);
         });
         b_action.setOnClickListener(view->{
             if(isOwingMoney){
                 toast("przygotuj 166.66 zl za warunek");
+                delayed(this::finishAffinity,1500);
             } else {
                 toast("Zaliczone");
+                delayed(this::finishAffinity,500);
             }
         });
 
@@ -112,7 +116,8 @@ public class A1 extends BaseActivity {
             float average = result.getData().getFloatExtra("average", 0);
 
             // Show the average grade
-            String resultMessage = "Średnia: " + average;
+            NumberFormat formatter = new DecimalFormat("0.00");
+            String resultMessage = "Średnia: "+formatter.format(average);
             toast(resultMessage);
 
             b_action.setVisibility(View.VISIBLE);
@@ -151,7 +156,7 @@ public class A1 extends BaseActivity {
                 et_points.setError("OOOOOOOCENAAAAA");
             }
             toast(outp);
-            b_points.setVisibility(View.GONE);
+            b_points.setVisibility(View.INVISIBLE);
         }
     }
 }

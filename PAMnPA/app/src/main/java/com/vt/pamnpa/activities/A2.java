@@ -43,6 +43,7 @@ public class A2 extends BaseActivity {
 
         // Retrieve number of subjects (points) from previous activity
         numSubjects = getIntent().getIntExtra("points", 0);
+        if(numSubjects > subjectNames.length) numSubjects = subjectNames.length;    //fix
 
         // Set up the RecyclerView and GradesRV adapter
         gradesRV = new GradesRV(this);
@@ -64,8 +65,13 @@ public class A2 extends BaseActivity {
 
             // Calculate the average based on the grades in the GradesRV
             for (GradesRV.Grade grade : gradesRV.getGrades()) {
-                total += grade.getPoint();
-                grades[count++] = grade.getPoint();
+                float grade_ = grade.getPoint();
+                if(grade_==0){
+                    toast("Musisz wybrać coś dla "+grade.getSubject());
+                    return;
+                }
+                total += grade_;
+                grades[count++] = grade_;
             }
 
             if (count > 0) {

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -67,5 +69,10 @@ public abstract class BaseActivity  extends AppCompatActivity {
     protected void toast(String msg){
         Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    protected void delayed(Runnable task, int ms){
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(task, ms);
     }
 }
