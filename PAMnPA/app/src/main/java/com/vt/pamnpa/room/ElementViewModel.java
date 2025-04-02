@@ -12,7 +12,7 @@ public class ElementViewModel extends AndroidViewModel {
         mRepository = new ElementRepository(application);
         mAllElements = mRepository.getAllElements();//… pobranie wszystkich metod z repozytorium
     }
-    LiveData<List<Element>> getAllElements() {
+    public LiveData<List<Element>> getAllElements() {
         return mAllElements;
     }
     public void deleteAll() {

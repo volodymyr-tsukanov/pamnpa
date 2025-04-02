@@ -13,17 +13,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.vt.pamnpa.R;
 import com.vt.pamnpa.adapters.ElementListAdapter;
+import com.vt.pamnpa.adapters.ElementRV;
 import com.vt.pamnpa.room.ElementViewModel;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 public class A3 extends BaseActivity {
-    private ElementViewModel mElementViewModel;
-    private ElementListAdapter mAdapter;
+    private ElementViewModel mPhoneViewModel;
+    private ElementRV mAdapter;
 
 
     @Override
@@ -32,6 +35,15 @@ public class A3 extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_a3);
+
+        mAdapter = new ElementRV(this);
+        //mBinding.phoneListRecyclerView.setAdapter(mAdapter);
+        //mBinding.phoneListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mPhoneViewModel = new ViewModelProvider(this).get(ElementViewModel.class);
+        mPhoneViewModel.getAllElements().observe(this, elements -> {
+                    mAdapter.setElementList(elements);
+                });
 
         intent.setClass(this, MainActivity.class);
     }
