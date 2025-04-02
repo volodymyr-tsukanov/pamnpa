@@ -37,4 +37,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //sqlite db
+    implementation(libs.roomRuntime)
+    annotationProcessor(libs.roomCompiler)
 }
