@@ -13,6 +13,7 @@ import com.vt.pamnpa.R;
 public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        isMenuEnabled = true;
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);

@@ -41,9 +41,7 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
     @Override
     public int getItemCount() {
         //w momencie tworzenia obiektu adaptera lista może nie być dostępna
-        if (elements != null)
-            return elements.size();
-        return 0;
+        return elements.size();
     }
     //ponieważ dane wyświetlane na liście będą się zmieniały ta metoda umożliwia aktualizację
     //danych w adapterze (i w konsekwencji) wyświetlanych w RecyclerView

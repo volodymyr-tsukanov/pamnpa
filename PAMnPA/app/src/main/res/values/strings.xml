@@ -25,6 +25,7 @@
     </string-array>
 
     <string name="activity_3_name">DB - Lab3</string>
+    <string name="activity_3_menu_del">Wipe all data</string>
     <string name="activity_3_b_goBack_text">GObACK</string>
 
 </resources>
