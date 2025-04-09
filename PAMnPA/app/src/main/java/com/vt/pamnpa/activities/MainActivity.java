@@ -21,14 +21,20 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.menu_main_a1){
-            toast("Oceny");
+            toast("Lab1");
             intent.setClass(this,A1.class);
             arl.launch(intent);
             finish();
         }
-        if(id == R.id.menu_main_main){
+        if(id == R.id.menu_main_a3){
+            toast("Lab3");
+            intent.setClass(this,A3.class);
+            arl.launch(intent);
+            finish();
+        }
+        if(id == R.id.menu_main_main) {
             toast("MAIN");
-            intent.setClass(this,MainActivity.class);
+            intent.setClass(this, MainActivity.class);
             arl.launch(intent);
             finish();
         }

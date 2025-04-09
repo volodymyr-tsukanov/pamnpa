@@ -31,6 +31,7 @@ public class A2 extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        isMenuEnabled = false;
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_a2);

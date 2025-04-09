@@ -13,11 +13,11 @@ public interface ElementDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     void insert(Element element);
     //adnotacja pozwalająca na wykonanie dowolnego polecenia np. skasowania wszystkich elementów
-    @Query("DELETE FROM nazwa_tabeli")
+    @Query("DELETE FROM phones")
     void deleteAll();
     //metoda zwraca listę elementów opakowaną w pojemnik live data pozwalający na odbieranie
     //powiadomień o zmianie danych. Room wykonuje zapytanie w innym wątku
     //live data powiadamia obserwatora w głównym wątku aplikacji
-    @Query("SELECT * FROM nazwa_tabeli ORDER BY nazwa_kolumny_2_w_tabeli ASC")
+    @Query("SELECT * FROM phones ORDER BY model ASC")
     LiveData<List<Element>> getAlphabetizedElements();
 }

@@ -3,12 +3,12 @@
 
     <string name="activity_main_name">MAIN</string>
 
-    <string name="activity_1_name">Oceny</string>
+    <string name="activity_1_name">Lab1 - Oceny</string>
     <string name="activity_1_text_name">Imię</string>
     <string name="activity_1_text_surname">Nazwisko</string>
     <string name="activity_1_text_points">Punkty</string>
 
-    <string name="activity_2_name">A2</string>
+    <string name="activity_2_name">Lab2 - Edit Oceny</string>
     <string name="activity_2_b_goBack_text">GObACK</string>
     <string name="activity_2_b_calculate_text">Wylicz średnią</string>
     <string-array name="activity_2_subjects">
@@ -23,5 +23,8 @@
         <item>Enflish</item>
         <item>Skibidology</item>
     </string-array>
+
+    <string name="activity_3_name">DB - Lab3</string>
+    <string name="activity_3_b_goBack_text">GObACK</string>
 
 </resources>

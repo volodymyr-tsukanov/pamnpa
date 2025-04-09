@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +32,8 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
     @Override
     public void onBindViewHolder(ElementVH holder, int position) {
         Element element = elements.get(position);
+        holder.manufacturer.setText(element.getManufacturer());
+        holder.model.setText(element.getModel());
     }
 
     @Override
@@ -48,7 +51,10 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
     }
     //…
 
+
     public class ElementVH extends RecyclerView.ViewHolder {
+        TextView manufacturer, model;
+
         public ElementVH(View itemView) {
             super(itemView);
         }

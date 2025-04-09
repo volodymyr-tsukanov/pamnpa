@@ -21,7 +21,7 @@ public abstract class ElementRoomDatabase extends RoomDatabase {
             synchronized (ElementRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    ElementRoomDatabase.class, "nazwa_bazy")
+                                    ElementRoomDatabase.class, "roomBase")
 //ustawienie obiektu obsługującego zdarzenia związane z bazą
                             //(kod poniżej)
                             .addCallback(sRoomDatabaseCallback)
@@ -50,6 +50,7 @@ public abstract class ElementRoomDatabase extends RoomDatabase {
             //implementujący interfejs Runnable, może być zastąpiony wyrażeniem lambda
             databaseWriteExecutor.execute(() -> {
                 ElementDao dao = INSTANCE.elementDao();
+                dao.insert(new Element("Nokia","3310"));
                 //tworzenie elementów (obiektów klasy Element) i dodawanie ich do bazy
                 //za pomocą metody insert() z obiektu dao
                 //tutaj możemy określić początkową zawartość bazy danych

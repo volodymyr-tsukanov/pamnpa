@@ -7,8 +7,7 @@ public class ElementRepository {
     private ElementDao mElementDao;
     private LiveData<List<Element>> mAllElements;
     ElementRepository(Application application) {
-        ElementRoomDatabase elementRoomDatabase =
-                ElementRoomDatabase.getDatabase(application);
+        ElementRoomDatabase elementRoomDatabase = ElementRoomDatabase.getDatabase(application);
         //repozytorium korzysta z obiektu DAO do odwołań do bazy
         mElementDao = elementRoomDatabase.elementDao();
         mAllElements = mElementDao.getAlphabetizedElements();//… odczytanie wszystkich elementów z DAO
@@ -19,6 +18,7 @@ public class ElementRepository {
     }
     void deleteAll() {
         ElementRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mElementDao.deleteAll();
             //… skasowanie wszystkich elementów za pomocą DAO
         });
     }

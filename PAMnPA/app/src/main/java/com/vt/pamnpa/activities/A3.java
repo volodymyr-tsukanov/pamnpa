@@ -15,9 +15,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vt.pamnpa.R;
-import com.vt.pamnpa.adapters.ElementListAdapter;
+import com.vt.pamnpa.adapters.ElementRV;
 import com.vt.pamnpa.adapters.ElementRV;
 import com.vt.pamnpa.room.ElementViewModel;
 
@@ -25,8 +26,11 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 public class A3 extends BaseActivity {
+    RecyclerView rv_phones;
+    Button b_goBack;
+
     private ElementViewModel mPhoneViewModel;
-    private ElementRV mAdapter;
+    private ElementRV phonesRV;
 
 
     @Override
@@ -35,14 +39,24 @@ public class A3 extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_a3);
+        if (getSupportActionBar() != null) getSupportActionBar().hide();
 
-        mAdapter = new ElementRV(this);
-        //mBinding.phoneListRecyclerView.setAdapter(mAdapter);
-        //mBinding.phoneListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        b_goBack = findViewById(R.id.activity_a3_b_goBack);
+        rv_phones = findViewById(R.id.activity_a3_rv_phones);
+
+        b_goBack.setOnClickListener(view->{
+            intent.setClass(this, MainActivity.class);
+            arl.launch(intent);
+            finish();
+        });
+
+        phonesRV = new ElementRV(this);
+        rv_phones.setLayoutManager(new LinearLayoutManager(this));
+        rv_phones.setAdapter(phonesRV);
 
         mPhoneViewModel = new ViewModelProvider(this).get(ElementViewModel.class);
         mPhoneViewModel.getAllElements().observe(this, elements -> {
-                    mAdapter.setElementList(elements);
+                    phonesRV.setElementList(elements);
                 });
 
         intent.setClass(this, MainActivity.class);
