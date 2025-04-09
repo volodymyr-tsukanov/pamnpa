@@ -56,8 +56,9 @@ public class A3 extends BaseActivity {
 
         mPhoneViewModel = new ViewModelProvider(this).get(ElementViewModel.class);
         mPhoneViewModel.getAllElements().observe(this, elements -> {
-                    phonesRV.setElementList(elements);
-                });
+            toast(elements.size()+" db entries");
+            phonesRV.setElementList(elements);
+        });
 
         intent.setClass(this, MainActivity.class);
     }

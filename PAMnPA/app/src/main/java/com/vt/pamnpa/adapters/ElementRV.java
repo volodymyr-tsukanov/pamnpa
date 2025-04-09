@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
@@ -19,7 +21,7 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
     //w momencie tworzenia obiektu adaptera lista może nie być dostępna
     public ElementRV(Context context) {
         li = LayoutInflater.from(context);
-        elements = null;
+        elements = new ArrayList<>();
     }
 
     @NonNull
@@ -46,7 +48,7 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
     //ponieważ dane wyświetlane na liście będą się zmieniały ta metoda umożliwia aktualizację
     //danych w adapterze (i w konsekwencji) wyświetlanych w RecyclerView
     public void setElementList(List<Element> elementList) {
-        elementList = elementList;
+        elements = elementList;
         notifyDataSetChanged();
     }
     //…
@@ -57,6 +59,8 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
 
         public ElementVH(View itemView) {
             super(itemView);
+            manufacturer = itemView.findViewById(R.id.manufacturer);
+            model = itemView.findViewById(R.id.model);
         }
     }
 }
