@@ -27,5 +27,16 @@
     <string name="activity_3_name">DB - Lab3</string>
     <string name="activity_3_menu_del">Wipe all data</string>
     <string name="activity_3_b_goBack_text">GObACK</string>
+    <string name="activity_3_add_mr">manufacturer</string>
+    <string name="activity_3_add_mr_hint">the creator</string>
+    <string name="activity_3_add_ml">model</string>
+    <string name="activity_3_add_ml_hint">the thing</string>
+    <string name="activity_3_add_vn">Android version</string>
+    <string name="activity_3_add_vn_hint">the number</string>
+    <string name="activity_3_add_se">web site</string>
+    <string name="activity_3_add_se_hint">the address (omit http://)</string>
+    <string name="activity_3_add_b_se">Open web site</string>
+    <string name="activity_3_add_b_cancel">Cancel</string>
+    <string name="activity_3_add_b_save">Save</string>
 
 </resources>

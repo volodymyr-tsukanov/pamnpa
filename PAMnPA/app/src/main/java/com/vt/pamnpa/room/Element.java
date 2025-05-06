@@ -17,11 +17,17 @@ public class Element {
     private String manufacturer;
     @ColumnInfo(name = "model")
     private String model;
+    @ColumnInfo(name = "version")
+    private int version;
+    @ColumnInfo(name = "site")
+    private String site;
 
     //konstruktor wykorzystywany przez Room do tworzenia obiektów
-    public Element(String manufacturer, String model) {
+    public Element(String manufacturer, String model, int version, String site) {
         this.manufacturer = manufacturer;
         this.model = model;
+        this.version = version;
+        this.site = site;
     }
 
     public long getId() {
@@ -42,7 +48,18 @@ public class Element {
     public void setModel(String model) {
         this.model = model;
     }
-
+    public int getVersion() {
+        return version;
+    }
+    public void setVersion(int version) {
+        this.version = version;
+    }
+    public String getSite() {
+        return site;
+    }
+    public void setSite(String site) {
+        this.site = site;
+    }
     //jeżeli konieczne są dodatkowe konstruktory należy je poprzedzić adnotacją @Ignore
     //żeby biblioteka Room z nich nie korzystała
     //Room może wymagać również getterów i setterów także warto je utworzyć

@@ -50,7 +50,7 @@ public abstract class ElementRoomDatabase extends RoomDatabase {
             //implementujący interfejs Runnable, może być zastąpiony wyrażeniem lambda
             databaseWriteExecutor.execute(() -> {
                 ElementDao dao = INSTANCE.elementDao();
-                dao.insert(new Element("Nokia","3310"));
+                dao.insert(new Element("Nokia","3310",-1,"moodle3.cs.pollub.pl"));
                 //tworzenie elementów (obiektów klasy Element) i dodawanie ich do bazy
                 //za pomocą metody insert() z obiektu dao
                 //tutaj możemy określić początkową zawartość bazy danych

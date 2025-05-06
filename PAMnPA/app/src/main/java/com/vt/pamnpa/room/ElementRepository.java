@@ -6,12 +6,14 @@ import java.util.List;
 public class ElementRepository {
     private ElementDao mElementDao;
     private LiveData<List<Element>> mAllElements;
+
     ElementRepository(Application application) {
         ElementRoomDatabase elementRoomDatabase = ElementRoomDatabase.getDatabase(application);
         //repozytorium korzysta z obiektu DAO do odwołań do bazy
         mElementDao = elementRoomDatabase.elementDao();
         mAllElements = mElementDao.getAlphabetizedElements();//… odczytanie wszystkich elementów z DAO
     }
+
     LiveData<List<Element>> getAllElements() {
         //… metdoda zwraca wszystkie elementy
         return mAllElements;
@@ -21,5 +23,8 @@ public class ElementRepository {
             mElementDao.deleteAll();
             //… skasowanie wszystkich elementów za pomocą DAO
         });
+    }
+    void insert(Element entry){
+        ElementRoomDatabase.databaseWriteExecutor.execute(() -> mElementDao.insert(entry));
     }
 }
