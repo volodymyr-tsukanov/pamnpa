@@ -54,6 +54,7 @@ public class A3 extends BaseActivity {
 
         phonesRV = new ElementRV(this, element -> {
             el_selected = element;
+            toast(element.getModel());
         });
         rv_phones.setLayoutManager(new LinearLayoutManager(this));
         rv_phones.setAdapter(phonesRV);

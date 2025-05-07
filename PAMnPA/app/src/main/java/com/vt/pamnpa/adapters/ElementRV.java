@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
 
     List<Element> elements;
     LayoutInflater li;
-    private OnItemClickListener mOnItemClickListener;
+    OnItemClickListener mOnItemClickListener;
+    int selectedIndex = -1;
     //…
     //w odróżnieniu od lab1c adapter nie otrzymuje listy elementów jako parametru konstruktora
     //w momencie tworzenia obiektu adaptera lista może nie być dostępna
@@ -43,6 +46,11 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
         Element element = elements.get(position);
         holder.manufacturer.setText(element.getManufacturer());
         holder.model.setText(element.getModel());
+        if (selectedIndex == position) {
+            holder.bg.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.bloody));
+        } else {
+            holder.bg.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.blackTint));
+        }
     }
 
     @Override
@@ -68,10 +76,12 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
 
 
     public class ElementVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ConstraintLayout bg;
         TextView manufacturer, model;
 
         public ElementVH(View itemView) {
             super(itemView);
+            bg = itemView.findViewById(R.id.bg);
             manufacturer = itemView.findViewById(R.id.manufacturer);
             model = itemView.findViewById(R.id.model);
             itemView.setOnClickListener(this);
@@ -81,7 +91,11 @@ public class ElementRV extends RecyclerView.Adapter<ElementRV.ElementVH> {
         public void onClick(View view) {
             int pos = getAdapterPosition();
             if (pos != RecyclerView.NO_POSITION) {
+                int oldSelectedIndex = selectedIndex;
+                selectedIndex = selectedIndex==pos ? -1 : pos;
                 mOnItemClickListener.onItemClickListener(elements.get(pos));
+                notifyItemChanged(pos);
+                if(oldSelectedIndex!=-1) notifyItemChanged(oldSelectedIndex);
             }
         }
     }
