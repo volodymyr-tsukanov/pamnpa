@@ -34,7 +34,7 @@
     <string name="activity_3_add_vn">Android version</string>
     <string name="activity_3_add_vn_hint">the number</string>
     <string name="activity_3_add_se">web site</string>
-    <string name="activity_3_add_se_hint">the address (omit http://)</string>
+    <string name="activity_3_add_se_hint">the address (start with http://)</string>
     <string name="activity_3_add_b_se">Open web site</string>
     <string name="activity_3_add_b_cancel">Cancel</string>
     <string name="activity_3_add_b_save">Save</string>

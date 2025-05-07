@@ -43,6 +43,7 @@ public class A3 extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_a3);
+        setTitle("Phones");
 
         rv_phones = findViewById(R.id.activity_a3_rv_phones);
         fab = findViewById(R.id.activity_a3_fab);
@@ -58,7 +59,8 @@ public class A3 extends BaseActivity {
         });
 
         fab.setOnClickListener((view)->{
-
+            intent.setClass(this, A3Add.class);
+            arl.launch(intent);
         });
 
         intent.setClass(this, MainActivity.class);
@@ -68,7 +70,8 @@ public class A3 extends BaseActivity {
     protected void onActivityResult(ActivityResult result) {
         switch(result.getResultCode()) {
             case 1: //added successfully
-                phonesRV.setElementList(mPhoneViewModel.getAllElements().getValue());
+                phonesRV.notifyItemInserted(phonesRV.getItemCount());
+                //phonesRV.setElementList(mPhoneViewModel.getAllElements().getValue());
                 break;
             case 0: //canceled
                 toast("No items added");

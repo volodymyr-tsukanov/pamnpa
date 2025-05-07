@@ -9,80 +9,103 @@
         tools:context=".activities.A3Add">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/activity_a3_add_inputs"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="80dp">
+        android:id="@+id/activity_a3_add_inputs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-                android:text="@string/activity_3_add_mr"
-                android:layout_width="wrap_content"
-                android:textSize="22sp"
-                android:layout_height="wrap_content" android:id="@+id/activity_a3_add_mr_label"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="16dp"/>
+            android:id="@+id/activity_a3_add_mr_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/activity_3_add_mr"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/activity_3_add_mr_hint"
-                android:textSize="22sp"
-                android:id="@+id/activity_a3_add_mr_edit"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/activity_a3_add_mr_label" android:layout_marginStart="8dp"/>
+            android:id="@+id/activity_a3_add_mr_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="@string/activity_3_add_mr_hint"
+            android:inputType="text"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_a3_add_mr_label"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-                android:text="@string/activity_3_add_ml"
-                android:textSize="22sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/activity_a3_add_ml_label"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_mr_label"
-                android:layout_marginTop="16dp"
-        />
+            android:id="@+id/activity_a3_add_ml_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/activity_3_add_ml"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_mr_label" />
+
         <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/activity_3_add_ml_hint"
-                android:textSize="22sp"
-                android:id="@+id/activity_a3_add_ml_edit" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_mr_edit"
-                app:layout_constraintStart_toEndOf="@+id/activity_a3_add_ml_label" android:layout_marginStart="8dp"/>
+            android:id="@+id/activity_a3_add_ml_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="@string/activity_3_add_ml_hint"
+            android:inputType="text"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_a3_add_ml_label"
+            app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_mr_edit" />
+
         <TextView
-                android:text="@string/activity_3_add_vn"
-                android:textSize="22sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/activity_a3_add_vn_label"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_ml_label"
-                android:layout_marginTop="24dp"/>
+            android:id="@+id/activity_a3_add_vn_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/activity_3_add_vn"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_ml_label" />
+
         <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:inputType="number|numberSigned"
-                android:textSize="22sp"
-                android:hint="@string/activity_3_add_vn_hint"
-                android:id="@+id/activity_a3_add_vn_edit"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_ml_edit"
-                app:layout_constraintStart_toEndOf="@+id/activity_a3_add_vn_label" android:layout_marginStart="8dp"/>
+            android:id="@+id/activity_a3_add_vn_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="@string/activity_3_add_vn_hint"
+            android:inputType="number|numberSigned"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_a3_add_vn_label"
+            app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_ml_edit" />
+
         <TextView
-                android:text="@string/activity_3_add_se"
-                android:textSize="22sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/activity_a3_add_se_label"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_vn_label" android:layout_marginTop="8dp"/>
+            android:id="@+id/activity_a3_add_se_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/activity_3_add_se"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_vn_label" />
+
         <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/activity_3_add_se_hint"
-                android:textSize="22sp"
-                android:id="@+id/activity_a3_add_se_edit"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_vn_edit"
-                app:layout_constraintStart_toEndOf="@+id/activity_a3_add_se_label" android:layout_marginStart="8dp"/>
+            android:id="@+id/activity_a3_add_se_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="@string/activity_3_add_se_hint"
+            android:inputType="text"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_a3_add_se_label"
+            app:layout_constraintTop_toBottomOf="@+id/activity_a3_add_vn_edit" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

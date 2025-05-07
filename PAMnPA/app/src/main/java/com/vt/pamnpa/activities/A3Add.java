@@ -34,6 +34,7 @@ public class A3Add extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_a3_add);
+        setTitle("Add new phone");
 
         edit_mr = findViewById(R.id.activity_a3_add_mr_edit);
         edit_ml = findViewById(R.id.activity_a3_add_ml_edit);
@@ -62,26 +63,34 @@ public class A3Add extends BaseActivity {
 
         b_save.setOnClickListener((view)->{
             String manufacturer = edit_mr.getText().toString(), model = edit_ml.getText().toString(), site = edit_se.getText().toString();
-            int version = Integer.parseInt(edit_vn.getText().toString());   //!dangerous lazy
-            if(manufacturer.isBlank()){
+            int version = -1;
+            try {
+                version = Integer.parseInt(edit_vn.getText().toString());
+            } catch (NumberFormatException ignored) {
+            }  //!dangerous lazy
+            if (manufacturer.isEmpty()) {
+                toast("hey");
                 edit_mr.setError("Fill me");
                 return;
             }
-            if(model.isBlank()){
+            if (model.isEmpty()) {
                 edit_ml.setError("Fill me, pls");
                 return;
             }
-            if(!checkWebAddress(site)){
+            if (!checkWebAddress(site)) {
                 edit_se.setError("!?");
                 return;
             }
-            if(version>15) {
+            if (version < 0) {
+                edit_vn.setError("enter any version (0 to ignore)");
+                return;
+            } else if (version > 15) {
                 edit_vn.setError("time traveller? tell me stock market insides pls");
                 return;
             }
-            Element el = new Element(manufacturer,model,version,site);
+            Element el = new Element(manufacturer, model, version, site);
             mPhoneViewModel.insert(el);
-            setResult(1,intent);
+            setResult(1, intent);
             finish();
         });
 
@@ -91,12 +100,7 @@ public class A3Add extends BaseActivity {
     @Override
     protected void onActivityResult(ActivityResult result) {}
 
-    @Override
-    public void setTitle(CharSequence title) {
-        super.setTitle("Add new phone");
-    }
-
     private  boolean checkWebAddress(String inputText) {
-        return !inputText.isBlank() && inputText.startsWith("http");
+        return inputText.startsWith("http");
     }
 }
