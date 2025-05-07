@@ -12,11 +12,13 @@ import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +59,8 @@ public class A3 extends BaseActivity {
             toast(elements.size()+" db entries");
             phonesRV.setElementList(elements);
         });
+        ItemTouchHelper ith = getTouchHelper();
+        ith.attachToRecyclerView(rv_phones);
 
         fab.setOnClickListener((view)->{
             intent.setClass(this, A3Add.class);
@@ -92,5 +96,24 @@ public class A3 extends BaseActivity {
             phonesRV.notifyDataSetChanged();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private ItemTouchHelper getTouchHelper() {
+        ItemTouchHelper.Callback rv_callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT){
+            @Override
+            public boolean onMove(RecyclerView recyclerView,
+                                  RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;   //no drag
+            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int pos = viewHolder.getAdapterPosition();
+                //?delete
+            }
+        };
+        ItemTouchHelper ith = new ItemTouchHelper(rv_callback);
+        return ith;
     }
 }
