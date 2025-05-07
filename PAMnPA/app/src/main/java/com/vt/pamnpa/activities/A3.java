@@ -26,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vt.pamnpa.R;
 import com.vt.pamnpa.adapters.ElementRV;
 import com.vt.pamnpa.adapters.ElementRV;
+import com.vt.pamnpa.room.Element;
 import com.vt.pamnpa.room.ElementViewModel;
 
 import java.text.DecimalFormat;
@@ -37,6 +38,7 @@ public class A3 extends BaseActivity {
 
     private ElementViewModel mPhoneViewModel;
     private ElementRV phonesRV;
+    private Element el_selected;
 
 
     @Override
@@ -50,7 +52,9 @@ public class A3 extends BaseActivity {
         rv_phones = findViewById(R.id.activity_a3_rv_phones);
         fab = findViewById(R.id.activity_a3_fab);
 
-        phonesRV = new ElementRV(this);
+        phonesRV = new ElementRV(this, element -> {
+            el_selected = element;
+        });
         rv_phones.setLayoutManager(new LinearLayoutManager(this));
         rv_phones.setAdapter(phonesRV);
 
@@ -74,7 +78,7 @@ public class A3 extends BaseActivity {
     protected void onActivityResult(ActivityResult result) {
         switch(result.getResultCode()) {
             case 1: //added successfully
-                phonesRV.notifyItemInserted(phonesRV.getItemCount());
+                phonesRV.notifyItemInserted(phonesRV.getItemCount()-1);
                 //phonesRV.setElementList(mPhoneViewModel.getAllElements().getValue());
                 break;
             case 0: //canceled
@@ -100,17 +104,23 @@ public class A3 extends BaseActivity {
 
 
     private ItemTouchHelper getTouchHelper() {
-        ItemTouchHelper.Callback rv_callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT){
+        ItemTouchHelper.Callback rv_callback = new ItemTouchHelper.SimpleCallback(0,  /*ItemTouchHelper.UP | ItemTouchHelper.DOWN | */ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT){
             @Override
             public boolean onMove(RecyclerView recyclerView,
                                   RecyclerView.ViewHolder viewHolder,
                                   RecyclerView.ViewHolder target) {
-                return false;   //no drag
+                /*int fromPos = viewHolder.getAdapterPosition();
+                int toPos = target.getAdapterPosition();
+
+                // Swap in adapter
+                phonesRV.swapElements(fromPos, toPos);*/
+                return false;  // true if moved
             }
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int pos = viewHolder.getAdapterPosition();
-                //?delete
+                phonesRV.removeElement(pos);
+                //?delete fr
             }
         };
         ItemTouchHelper ith = new ItemTouchHelper(rv_callback);
