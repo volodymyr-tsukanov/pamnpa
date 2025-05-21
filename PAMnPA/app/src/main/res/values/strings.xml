@@ -39,4 +39,12 @@
     <string name="activity_3_add_b_cancel">Cancel</string>
     <string name="activity_3_add_b_save">Save</string>
 
+    <string name="activity_4_name">Threading</string>
+    <string name="activity_4_url_label">URL:</string>
+    <string name="activity_4_get_button">gEt InFo</string>
+    <string name="activity_4_get_size_label">FiLe sIzE:</string>
+    <string name="activity_4_get_type_label">fILe TypE:</string>
+    <string name="activity_4_downl_button">DoWnLoAd</string>
+    <string name="activity_4_downl_label">bYTEs DownLoadEd:</string>
+
 </resources>
