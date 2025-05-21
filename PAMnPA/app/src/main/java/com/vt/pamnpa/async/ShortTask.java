@@ -1,9 +1,14 @@
 package com.vt.pamnpa.async;
 
 import android.os.Handler;
+import android.os.Looper;
 
 import java.util.concurrent.*;
 
+
+enum ShortTaskResult {
+    ok
+}
 
 public class ShortTask {
     private static final String TAG = ShortTask.class.getSimpleName();
@@ -11,7 +16,7 @@ public class ShortTask {
     private final Handler mainThreadHandler;
     private Future<ResultType> future;
 
-    public FileShortTask() {
+    public ShortTask() {
         // utworzenie puli 2 wątków
         executorService = Executors.newFixedThreadPool(2);
         // utworzenie Handlera do wysyłania zadań do wątku UI
@@ -20,7 +25,7 @@ public class ShortTask {
 
     // wywołanie zwrotne do przekazywania wyników
     public interface ResultCallback {
-        void onSuccess(ResultType result);
+        void onSuccess(ShortTaskResulth result);
 
         void onError(Throwable throwable);
         // można dodać więcej metod np. do przekazywania informacji o postępie
@@ -28,7 +33,7 @@ public class ShortTask {
 
     // do metody trzeba przekazać wywołanie zwrotne do odbierania wyników i wymagane
     // parametry
-    public Future<ResultType> executeTask(ResultCallback callback, String param) {
+    public Future<ShortTaskResult> executeTask(ResultCallback callback, String param) {
         // anulowanie bieżącego zadania
         if (future != null && !future.isDone()) {
             future.cancel(true);
@@ -41,7 +46,7 @@ public class ShortTask {
                 try {
                     // czekanie na wynik (jeżeli wyniku nie ma blokuje wątek
                     // wywołujący)
-                    ResultType result = future.get();
+                    ShortTaskResult result = future.get();
                     // przekazanie wyniku
                     callback.onSuccess(result);
                 } catch (CancellationException e) {

@@ -33,6 +33,12 @@ public class MainActivity extends BaseActivity {
             arl.launch(intent);
             finish();
         }
+        if(id == R.id.menu_main_a4){
+            toast("Lab4");
+            intent.setClass(this,A4.class);
+            arl.launch(intent);
+            finish();
+        }
         if(id == R.id.menu_main_main) {
             toast("MAIN");
             intent.setClass(this, MainActivity.class);
