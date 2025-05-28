@@ -1,8 +1,13 @@
 package com.vt.pamnpa.activities;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,17 +34,23 @@ import com.vt.pamnpa.adapters.FileInfo;
 import com.vt.pamnpa.async.ShortTask;
 import com.vt.pamnpa.room.Element;
 import com.vt.pamnpa.room.ElementViewModel;
+import com.vt.pamnpa.services.ItsService;
 
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class A4 extends BaseActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     EditText et_url;
     TextView tv_size, tv_type, tv_downl;
     ProgressBar pb_downl;
     Button b_get, b_downl;
 
+    boolean serviceBound = false;
+    //dane z usługi
+    LiveData<ProgressEvent> progressEventLiveData;
     ShortTask st;
 
     @Override
@@ -61,20 +72,21 @@ public class A4 extends BaseActivity {
         et_url.setText("https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.24.tar.xz");
 
         st = new ShortTask();
-        b_get.setOnClickListener((l)->{
+        b_get.setOnClickListener((l) -> {
             String url = getUrl();
-            if(url.isEmpty()){
+            if (url.isEmpty()) {
                 return;
             }
             st.getFileInfo(url, new ShortTask.ResultCallback<FileInfo>() {
                 @Override
                 public void onSuccess(FileInfo result) {
-                    tv_size.setText((result.getSize()/1024/1024+1) + "MB");
+                    tv_size.setText((result.getSize() / 1024 / 1024 + 1) + "MB");
                     tv_type.setText(result.getType());
                 }
 
                 @Override
-                public void onProgress(int progress) {}
+                public void onProgress(int progress) {
+                }
 
                 @Override
                 public void onError(Throwable throwable) {
@@ -83,9 +95,9 @@ public class A4 extends BaseActivity {
             });
             toast("get info");
         });
-        b_downl.setOnClickListener((l)->{
+        b_downl.setOnClickListener((l) -> {
             String url = getUrl();
-            if(url.isEmpty()){
+            if (url.isEmpty()) {
                 return;
             }
 
@@ -108,29 +120,54 @@ public class A4 extends BaseActivity {
             toast("dwnld");
         });
 
+        Intent myServiceIntent = new Intent(this, ItsService.class);
+        bindService(myServiceIntent, serviceConnection,
+                Context.BIND_AUTO_CREATE);
+
         intent.setClass(this, MainActivity.class);
     }
 
     @Override
     protected void onDestroy() {
-        if(st!=null){
+        if (st != null) {
             st.shutdown();
         }
+        unbindService(serviceConnection);
         super.onDestroy();
     }
 
     @Override
     protected void onActivityResult(ActivityResult result) {
-        switch(result.getResultCode()) {
+        switch (result.getResultCode()) {
             default:
                 toast("Wrong result code");
         }
     }
 
 
-    private String getUrl(){
+    private String getUrl() {
         String url = et_url.getText().toString().trim();
-        if(url.isBlank() || !url.startsWith("http")) return "";
+        if (url.isBlank() || !url.startsWith("http")) return "";
         return url;
     }
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            serviceBound = true;
+            ItsService.ItsServiceBinder downloadBinder =
+                    (ItsService.ItsServiceBinder) iBinder;
+            //zapisanie i włączenie obserwowania obiektu LiveData z danymi z usługi
+            progressEventLiveData = binder.getProgressEvent();
+            progressEventLiveData.observe(A4.this,
+                    A4.this::updateProgress);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            //wyłączenie obserwowania
+            progressEventLiveData.removeObservers(MainActivity.this);
+            serviceBound = false;
+        }
+    };
 }
