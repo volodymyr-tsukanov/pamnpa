@@ -75,7 +75,7 @@ public class ShortTask {
         Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 
         Callable<FileInfo> task = () -> {
-            int bufferLength = 4096;
+            final int bufferLength = 12288;
             HttpsURLConnection connection = null;
             try {
                 URL url = new URL(fileUrl);

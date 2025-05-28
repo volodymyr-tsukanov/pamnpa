@@ -69,7 +69,7 @@ public class A4 extends BaseActivity {
             st.getFileInfo(url, new ShortTask.ResultCallback<FileInfo>() {
                 @Override
                 public void onSuccess(FileInfo result) {
-                    tv_size.setText(result.getSize() + "b");
+                    tv_size.setText((result.getSize()/1024/1024+1) + "MB");
                     tv_type.setText(result.getType());
                 }
 
