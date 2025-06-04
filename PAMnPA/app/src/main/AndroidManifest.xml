@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAMnPA"
         tools:targetApi="31">
+
+        <service android:name=".services.ItsService" />
+
         <activity
             android:name=".activities.A4"
             android:exported="false" />

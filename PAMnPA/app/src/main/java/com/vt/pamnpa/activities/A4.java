@@ -33,12 +33,9 @@ public class A4 extends BaseActivity {
     Button b_get, b_downl;
 
     boolean serviceBound = false;
-    //dane z usługi
     LiveData<ProgressEvent> progressEventLiveData;
     ItsService.ItsServiceBinder binder;
     A4ViewModel viewModel;
-
-    ShortTask st;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,55 +56,44 @@ public class A4 extends BaseActivity {
         et_url.setText("https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.24.tar.xz");
 
         viewModel = new ViewModelProvider(this).get(A4ViewModel.class);
-        viewModel.progress.observe(this, this::updateProgress);
+        viewModel.progress.observe(this, this::updateProgressRedundant);
 
-        st = new ShortTask();
         b_get.setOnClickListener((l) -> {
+            // Just get file info directly here (can be moved to service if desired)
             String url = getUrl();
             if (url.isEmpty()) {
                 return;
             }
-            st.getFileInfo(url, new ShortTask.ResultCallback<FileInfo>() {
-                @Override
-                public void onSuccess(FileInfo result) {
-                    tv_size.setText((result.getSize() / 1024 / 1024 + 1) + "MB");
-                    tv_type.setText(result.getType());
-                }
-
-                @Override
-                public void onProgress(int progress) {
-                }
-
-                @Override
-                public void onError(Throwable throwable) {
-                    toast("Error: " + throwable.getMessage());
-                }
-            });
+            // For now, call getFileInfo directly in ShortTask (as before)
+            new Thread(() -> {
+                ShortTask st = new ShortTask();
+                st.getFileInfo(url, new ShortTask.ResultCallback<FileInfo>() {
+                    @Override
+                    public void onSuccess(FileInfo result) {
+                        runOnUiThread(() -> {
+                            tv_size.setText((result.getSize() / 1024 / 1024 + 1) + "MB");
+                            tv_type.setText(result.getType());
+                        });
+                    }
+                    @Override
+                    public void onProgress(int progress) {}
+                    @Override
+                    public void onError(Throwable throwable) {
+                        runOnUiThread(() -> toast("Error: " + throwable.getMessage()));
+                    }
+                });
+            }).start();
             toast("get info");
         });
         b_downl.setOnClickListener((l) -> {
             String url = getUrl();
-            if (url.isEmpty()) {
-                return;
+            if (url.isEmpty()) return;
+            if (serviceBound && binder != null) {
+                binder.startDownload(url);
+                toast("Downloading...");
+            } else {
+                toast("Service not bound");
             }
-
-            st.downloadFile(url, new ShortTask.ResultCallback<FileInfo>() {
-                @Override
-                public void onSuccess(FileInfo result) {
-                    toast("Download finished. Size: " + result.getSize() + " bytes");
-                }
-
-                @Override
-                public void onProgress(int progress) {
-                    pb_downl.setProgress(progress);
-                }
-
-                @Override
-                public void onError(Throwable throwable) {
-                    toast("Download error: " + throwable.getMessage());
-                }
-            });
-            toast("dwnld");
         });
 
         // Bind service
@@ -117,32 +103,25 @@ public class A4 extends BaseActivity {
         // Restore progress from notification if present
         ProgressEvent eventFromNotification = getIntent().getParcelableExtra("KEY_PROGRESS");
         if (eventFromNotification != null) {
-            updateProgress(eventFromNotification);
+            updateProgressRedundant(eventFromNotification);
         }
-
-        intent.setClass(this, MainActivity.class);
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (st != null) {
-            st.shutdown();
-        }
-        if (serviceBound && progressEventLiveData != null) {
-            progressEventLiveData.removeObservers(this);
-        }
-        unbindService(serviceConnection);
-        super.onDestroy();
     }
 
     @Override
     protected void onActivityResult(ActivityResult result) {
-        switch (result.getResultCode()) {
-            default:
-                toast("Wrong result code");
-        }
     }
 
+    @Override
+    protected void onDestroy() {
+        if (serviceBound && progressEventLiveData != null) {
+            progressEventLiveData.removeObservers(this);
+        }
+        if (serviceBound) {
+            unbindService(serviceConnection);
+            serviceBound = false;
+        }
+        super.onDestroy();
+    }
 
     private String getUrl() {
         String url = et_url.getText().toString().trim();
@@ -154,10 +133,8 @@ public class A4 extends BaseActivity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             serviceBound = true;
-            ItsService.ItsServiceBinder downloadBinder =
-                    (ItsService.ItsServiceBinder) iBinder;
-            //zapisanie i włączenie obserwowania obiektu LiveData z danymi z usługi
-            progressEventLiveData = downloadBinder.getProgressEvent();
+            binder = (ItsService.ItsServiceBinder) iBinder;
+            progressEventLiveData = binder.getProgressEvent();
             progressEventLiveData.observe(A4.this, event -> {
                 if (event != null) {
                     viewModel.progress.setValue(event);
@@ -171,17 +148,16 @@ public class A4 extends BaseActivity {
                 progressEventLiveData.removeObservers(A4.this);
             }
             serviceBound = false;
+            binder = null;
         }
     };
 
-    private void updateProgress(ProgressEvent event) {
+    private void updateProgressRedundant(ProgressEvent event) {
         if (event == null) return;
         tv_downl.setText(String.format("%d / %d bytes", event.progress, event.total));
         pb_downl.setMax(event.total);
         pb_downl.setProgress(event.progress);
     }
-
-
 
     public static class A4ViewModel extends ViewModel {
         public final MutableLiveData<ProgressEvent> progress = new MutableLiveData<>();
