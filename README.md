@@ -3,8 +3,8 @@ Android app dev
 
 **Java**, **Android Studio** <br><br>
 
-![Finished](https://img.shields.io/badge/status-Finished%20%F0%9F%8F%81-3CB371?style=for-the-badge&logo=github)
 
+![Archived](https://img.shields.io/badge/status-Archived%20%F0%9F%AA%A6-DC143C?style=for-the-badge&logo=github)
 
 Shields: [![MIT License][mit-shield]][mit]
 
